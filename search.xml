@@ -49,11 +49,11 @@
       
         <tags>
             
-            <tag> 树莓派 </tag>
-            
             <tag> linux </tag>
             
             <tag> openwrt </tag>
+            
+            <tag> 树莓派 </tag>
             
             <tag> 软路由 </tag>
             
@@ -107,9 +107,9 @@
       
         <tags>
             
-            <tag> 软件推荐 </tag>
-            
             <tag> 树莓派 </tag>
+            
+            <tag> 软件推荐 </tag>
             
             <tag> AdGuardHome </tag>
             
@@ -136,9 +136,9 @@
       
         <tags>
             
-            <tag> 软件推荐 </tag>
-            
             <tag> 树莓派 </tag>
+            
+            <tag> 软件推荐 </tag>
             
             <tag> 折腾 </tag>
             
@@ -167,9 +167,9 @@
       
         <tags>
             
-            <tag> python </tag>
-            
             <tag> 数据挖掘 </tag>
+            
+            <tag> python </tag>
             
             <tag> 聚类算法 </tag>
             
