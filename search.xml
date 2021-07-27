@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Linux系统下各类压缩包的解压命令</title>
+      <link href="/post/f9e5217f.html"/>
+      <url>/post/f9e5217f.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="0x00-背景"><a class="markdownIt-Anchor" href="#0x00-背景"></a> 0x00 背景</h3><p>最近一直在折腾树莓派、服务器之类的，安装软件也是家常便饭，linux/unix环境可不像windows，何况还是在无桌面环境的情况下，像windows用户那样右键点击目标，左键单击安装或者解压就可以完成你想要的操作，这个时候确实还是windows方便~~(我苹果：D)~~，所以各种命令我们需要熟悉一下。</p><h3 id="0x01-干"><a class="markdownIt-Anchor" href="#0x01-干"></a> 0x01 干！</h3><h4 id="1-tar命令"><a class="markdownIt-Anchor" href="#1-tar命令"></a> 1、tar命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">tar -c: 建立压缩档案</span><br><span class="line">    -x: 解压</span><br><span class="line">    -t: 查看内容</span><br><span class="line">    -r: 向压缩归档文件末尾追加文件</span><br><span class="line">    -u: 更新愿压缩包中的文件</span><br><span class="line">    [optional:]</span><br><span class="line">    -z: 有gzip属性的</span><br><span class="line">    -j: 有bz2属性的</span><br><span class="line">    -Z: 有compress属性的</span><br><span class="line">    -v: 显示所有进程</span><br><span class="line">    -O: 将文件解开到标准输出</span><br><span class="line">    [-f]:使用档案名字，这个参数是最后一个参数，后面只能接档案名。</span><br></pre></td></tr></table></figure><h4 id="2-rar命令"><a class="markdownIt-Anchor" href="#2-rar命令"></a> 2、rar命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先需要下载源码包</span></span><br><span class="line">32位: wget https://www.rarlab.com/rar/rarlinux-5.7.1.tar.gz</span><br><span class="line">64位: wget https://www.rarlab.com/rar/rarlinux-x64-5.7.1.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压源码包</span></span><br><span class="line">32位: tar -zxvf rarlinux-5.7.1.tar.gz</span><br><span class="line">64位: tar -zxvf rarlinx-x86-5.7.1.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入文件夹内</span></span><br><span class="line"><span class="built_in">cd</span> rar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行make命令，编译安装</span></span><br><span class="line">make</span><br></pre></td></tr></table></figure><h4 id="3-jar命令"><a class="markdownIt-Anchor" href="#3-jar命令"></a> 3、jar命令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jar -c: 创建war包</span><br><span class="line">    -v: 显示过程信息</span><br><span class="line">    -f: 指定归档文件名</span><br><span class="line">    -M: 不创建条目的清单文件</span><br><span class="line">    -0: 只打包不压缩 注意⚠️:这是数字0，不是字母o</span><br></pre></td></tr></table></figure><h4 id="4-unzip命令"><a class="markdownIt-Anchor" href="#4-unzip命令"></a> 4、unzip命令</h4><p><strong>功 能说明：解压缩zip文 件</strong></p><p><strong>语　　法：unzip [-cflptuvz][-agCjLMnoqsVX][-P &lt;密 码&gt;][.zip文 件][文件][-d &lt;目录&gt;][-x &lt;文件&gt;] 或 unzip [-Z]</strong></p><p><strong>补充说明：unzip为.zip压缩文件的解压缩程序。</strong></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">unzip -c: 将解压的结果显示在屏幕上，并对字符稍作转换</span><br><span class="line">      -f   更 新现有的文件。</span><br><span class="line">      -l   显 示压缩文件内所包含的文件。</span><br><span class="line">      -p   与-c参数类似，会将解压缩的结果显示到屏幕上，但不会执行任 何的转换。</span><br><span class="line">      -t   检 查压缩文件是否正确。，但不解压。</span><br><span class="line">      -u   与-f参数类似，但是除了更新现有的文件外，也会将压缩文件中 的其他文件解压缩到目录中。</span><br><span class="line">      -v   执 行是时显示详细的信息。或查看压缩文件目录，但不解压。</span><br><span class="line">      -z   仅 显示压缩文件的备注文字。</span><br><span class="line">      -a   对 文本文件进行必要的字符转换。</span><br><span class="line">      -b   不 要对文本文件进行字符转换。</span><br><span class="line">      -C   压 缩文件中的文件名称区分大小写。</span><br><span class="line">      -j   不 处理压缩文件中原有的目录路径。</span><br><span class="line">      -L   将 压缩文件中的全部文件名改为小写。</span><br><span class="line">      -M   将 输出结果送到more程 序处理。</span><br><span class="line">      -n   解 压缩时不要覆盖原有的文件。</span><br><span class="line">      -o   不 必先询问用户，unzip执 行后覆盖原有文件。</span><br><span class="line">      -P&lt;密码&gt;   使 用zip的密码选项。</span><br><span class="line">      -q   执 行时不显示任何信息。</span><br><span class="line">      -s   将 文件名中的空白字符转换为底线字符。</span><br><span class="line">      -V   保 留VMS的文件版本信 息。</span><br><span class="line">      -X   解 压缩时同时回存文件原来的UID/GID。</span><br><span class="line">      [.zip文件]   指定.zip压缩文件。</span><br><span class="line">      [文件]   指定 要处理.zip压缩文 件中的哪些文件。</span><br><span class="line">      -d&lt;目录&gt;   指 定文件解压缩后所要存储的目录。</span><br><span class="line">      -x&lt;文件&gt;   指 定不要处理.zip压 缩文件中的哪些文件。</span><br><span class="line">      -Z   unzip -Z等 于执行zipinfo指 令。</span><br></pre></td></tr></table></figure><h4 id="5-zip命令"><a class="markdownIt-Anchor" href="#5-zip命令"></a> 5、zip命令</h4><p><strong>功能说明：压缩文件。</strong></p><p><strong>语　　法：zip [-AcdDfFghjJKlLmoqrSTuvVwXyz$][-b &lt;工 作目录&gt;][-ll][-n &lt;字 尾字符串&gt;][-t &lt;日 期时间&gt;][-&lt;压 缩效率&gt;][压 缩文件][文件…][-i &lt;范本样式&gt;][-x &lt;范本样式&gt;]</strong></p><p><strong>补充说明：zip是个使用广泛的压缩程序，文件经它压缩后会另外产生具 有&quot;.zip&quot;扩展名 的压缩文件。</strong></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">zip -A: 调整可执行的自动解压缩文件</span><br><span class="line">    -b&lt;工作目录&gt;   指 定暂时存放文件的目录。</span><br><span class="line">    -c   替 每个被压缩的文件加上注释。</span><br><span class="line">    -d   从 压缩文件内删除指定的文件。</span><br><span class="line">    -D   压 缩文件内不建立目录名称。</span><br><span class="line">    -f   此 参数的效果和指定&quot;-u&quot;参 数类似，但不仅更新既有文件，如果某些文件原本不存在于压缩文件内，使用   本参数会一并将其加入压缩文件中。</span><br><span class="line">    -F   尝 试修复已损坏的压缩文件。</span><br><span class="line">    -g   将 文件压缩后附加在既有的压缩文件之后，而非另行建立新的压缩文件。</span><br><span class="line">    -h   在 线帮助。</span><br><span class="line">    -i&lt;范本样式&gt;   只 压缩符合条件的文件。</span><br><span class="line">    -j   只 保存文件名称及其内容，而不存放任何目录名称。</span><br><span class="line">    -J   删 除压缩文件前面不必要的数据。</span><br><span class="line">    -k   使 用MS-DOS兼容格 式的文件名称。</span><br><span class="line">    -l   压 缩文件时，把LF字符 置换成LF+CR字 符。</span><br><span class="line">    -ll   压 缩文件时，把LF+CR字 符置换成LF字符。</span><br><span class="line">    -L   显 示版权信息。</span><br><span class="line">    -m   将 文件压缩并加入压缩文件后，删除原始文件，即把文件移到压缩文件中。</span><br><span class="line">    -n&lt;字尾字符串&gt;   不 压缩具有特定字尾字符串的文件。</span><br><span class="line">    -o   以 压缩文件内拥有最新更改时间的文件为准，将压缩文件的更改时间设成和该文件相同。</span><br><span class="line">    -q   不显 示指令执行过程。</span><br><span class="line">    -r   递 归处理，将指定目录下的所有文件和子目录一并处理。</span><br><span class="line">    -S   包 含系统和隐藏文件。</span><br><span class="line">    -t&lt;日期时间&gt;   把 压缩文件的日期设成指定的日期。</span><br><span class="line">    -T   检 查备份文件内的每个文件是否正确无误。</span><br><span class="line">    -u   更 换较新的文件到压缩文件内。</span><br><span class="line">    -v   显 示指令执行过程或显示版本信息。</span><br><span class="line">    -V   保 存VMS操作系统的文 件属性。</span><br><span class="line">    -w   在 文件名称里假如版本编号，本参数仅在VMS操 作系统下有效。</span><br><span class="line">    -x&lt;范本样式&gt;   压 缩时排除符合条件的文件。</span><br><span class="line">    -X   不 保存额外的文件属性。</span><br><span class="line">    -y   直 接保存符号连接，而非该连接所指向的文件，本参数仅在UNIX之 类的系统下有效。</span><br><span class="line">    -z   替 压缩文件加上注释。</span><br><span class="line">    -$   保 存第一个被压缩文件所在磁盘的卷册名称。</span><br><span class="line">    -&lt;压缩效率&gt;   压 缩效率是一个介于1-9的 数值。</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 好物分享 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux/unix </tag>
+            
+            <tag> 实用技巧 </tag>
+            
+            <tag> 命令 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>玩转命令行之文本编辑器篇</title>
       <link href="/post/d3a7b34f.html"/>
       <url>/post/d3a7b34f.html</url>
@@ -20,11 +49,11 @@
       
         <tags>
             
+            <tag> linux/unix </tag>
+            
             <tag> 命令行 </tag>
             
             <tag> 文本编辑器 </tag>
-            
-            <tag> linux/unix </tag>
             
         </tags>
       
@@ -249,7 +278,7 @@
       
       <categories>
           
-          <category> Web安全 </category>
+          <category> 读书笔记 </category>
           
       </categories>
       
@@ -276,7 +305,7 @@
       
       <categories>
           
-          <category> Web安全 </category>
+          <category> 读书笔记 </category>
           
       </categories>
       
