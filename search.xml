@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>内网穿透之frp篇</title>
+      <link href="/post/5d5d27cc.html"/>
+      <url>/post/5d5d27cc.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="0x00-背景废话"><a class="markdownIt-Anchor" href="#0x00-背景废话"></a> 0x00 背景（废话）</h3><p>之前咱写过一篇关于内网穿透的文章介绍了一下花生壳，<a href="https://iori-yimaga.top/post/2788188b.html">传送门在此</a>然后挖了个坑，说要研究一下frp，毕竟也是个大名鼎鼎的神器件，今天，忙完了手中的事，终于带着这篇文章来啦！</p><h3 id="0x01-正片开始"><a class="markdownIt-Anchor" href="#0x01-正片开始"></a> 0x01 正片开始</h3><h4 id="1-正常的思路"><a class="markdownIt-Anchor" href="#1-正常的思路"></a> 1、正常的思路</h4><p>首先，我们去github下载适合自己机器型号的二进制文件，<a href="https://github.com/fatedier/frp/releases">工具门🔧🚪</a>，这里我的树莓派3b是Ubuntu Server 20.04 LTS版，CPU架构为arm64，服务器是CentOS 7，CPU架构为amd64，下载这两个文件，然后分别上传到两个机器中。</p><img src="https://cdn.jsdelivr.net/gh/Iori-yimaga/PicBed@main/MyBlog/l_pcu.webp" alt="l_pcu" style="zoom:80%;" /><p>解压后进入文件夹可以发现分别有<code>fprc</code>、<code>frps</code>分别对应客户端和服务器端的可执行文件，还有<code>fprc.ini</code>、<code>frps.ini</code>也就是客户端和服务器端的配置文件。</p><h5 id="服务器端"><a class="markdownIt-Anchor" href="#服务器端"></a> 服务器端</h5><p>我们先修改服务器端的配置文件<code>frps.ini</code>：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">common</span>]</span><br><span class="line"><span class="string">bind_addr</span> <span class="string">=</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>     <span class="comment"># 允许所有网段连入</span></span><br><span class="line"><span class="string">bind_port</span> <span class="string">=</span> <span class="string">xxxx</span>        <span class="comment"># 设置frps的服务端口</span></span><br><span class="line"><span class="string">auto_token</span> <span class="string">=</span> <span class="string">xxxxx</span>      <span class="comment"># 设置加密密码</span></span><br><span class="line"><span class="string">authentication_timeout</span> <span class="string">=</span> <span class="number">0</span>   <span class="comment"># 身份认证超时</span></span><br></pre></td></tr></table></figure><p>配置完成后就可以启动服务器端啦：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以后台按照frps,ini配置文件运行frps服务，并将输出写入nohup.out文件</span></span><br><span class="line">nohup ./frps -c ./frps.ini &amp;</span><br></pre></td></tr></table></figure><p>整个流程大概是这样的：</p><p><img src="https://cdn.jsdelivr.net/gh/Iori-yimaga/PicBed@main/MyBlog/frps_raspi.webp" alt="frps_raspi" /></p><h5 id="树莓派端"><a class="markdownIt-Anchor" href="#树莓派端"></a> 树莓派端</h5><p>首先修改客户端的配置文件<code>frpc.ini</code>：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">common</span>]</span><br><span class="line"><span class="string">server_addr</span> <span class="string">=</span> <span class="string">服务器的公网ip</span></span><br><span class="line"><span class="string">server_port</span> <span class="string">=</span> <span class="string">服务器的绑定frps的端口</span></span><br><span class="line"></span><br><span class="line">[<span class="string">自定义穿透的服务名</span>]</span><br><span class="line"><span class="string">type</span> <span class="string">=</span> <span class="string">tcp/udp/http/https</span>  <span class="comment"># 服务类型</span></span><br><span class="line"><span class="string">local_ip</span> <span class="string">=</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="string">local_port</span> <span class="string">=</span> <span class="string">该服务的本地端口</span></span><br><span class="line"><span class="string">remote_port</span> <span class="string">=</span> <span class="string">转发至公网服务器的服务费端口</span></span><br></pre></td></tr></table></figure><p>配置完成后后台启动服务：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup ./frpc -c ./frpc.ini &amp;</span><br></pre></td></tr></table></figure><p>整个流程是这样的：</p><img src="https://cdn.jsdelivr.net/gh/Iori-yimaga/PicBed@main/MyBlog/frpc_raspi.webp" alt="frpc_raspi" style="zoom:80%;" /><p><strong>友情提示</strong>：如果有防火墙的话，千万不要忘了开放相应的端口哦～</p><h4 id="整活篇"><a class="markdownIt-Anchor" href="#整活篇"></a> 整活篇</h4><p>咱不是有花生壳嘛～～～咱可以把frp套在花生壳上啊，这种情况我们该怎么做呢，很简单，<code>frpc</code>和<code>frps</code>同时在树莓派上运行，然后<code>frpc.ini</code>的<code>server_addr</code>填写花生壳给的IP就可以啦。</p><h3 id="最后"><a class="markdownIt-Anchor" href="#最后"></a> 最后</h3><p>整活的事情就交给各位勇士了，大家可以去试试哦😄</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 折腾日记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 内网穿透 </tag>
+            
+            <tag> frp </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>树莓派搭建无污染DNS服务器</title>
       <link href="/post/de52ad95.html"/>
       <url>/post/de52ad95.html</url>
